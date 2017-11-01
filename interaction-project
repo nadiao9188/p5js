@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+
+    <script>
+        var color // fill color for red
+        var color2 // fill color for green
+        var color3 // fill color for blue
+        var opacity // fill color for opacity of drawing
+        
+        
+
+        function setup() {
+            // The size of the screen available to use in pixels
+            createCanvas(800,800);
+
+        }
+
+        function draw() {
+
+
+        }
+        
+        opacity = 255
+        // The design is drawn
+        // The design follows the mouse without clearing the previous drawings
+        // As the design follows the mouse, the drawing and the stroke gets less opaque
+        function mouseDragged() {
+            //Line surrounding the shapes is set to black and change opacity
+            stroke(0, 0, 0, opacity)
+            
+            // Every time the mouse moves the colors are changed to a random color as well as the opacity changing
+            fill(color = (random(0, 255)), color2 = (random(0, 255)), color3 = (random(0, 255)), opacity)
+            
+            // Circles of the design which follows the mouse
+            ellipse(mouseX + 20, mouseY - 20, 30)
+            ellipse(mouseX - 20, mouseY + 20, 30)
+            ellipse(mouseX + 20, mouseY + 20, 30)
+            ellipse(mouseX - 20, mouseY - 20, 30)
+            ellipse(mouseX, mouseY, 45)
+            
+            // Every time the mouse moves the colors are changed to a random color as well as the opacity changing
+            fill(color = (random(0, 255)), color2 = (random(0, 255)), color3 = (random(0, 255)), opacity)
+            
+            // Diamond of the design which follows the mouse 
+            quad(mouseX, mouseY, mouseX + 10, mouseY + 45, mouseX, mouseY + 60, mouseX - 10, mouseY + 45)
+            quad(mouseX, mouseY, mouseX - 10, mouseY - 45, mouseX, mouseY - 60, mouseX + 10, mouseY - 45)
+            quad(mouseX, mouseY, mouseX + 45, mouseY + 10, mouseX + 60, mouseY, mouseX + 45, mouseY - 10)
+            quad(mouseX, mouseY, mouseX - 45, mouseY - 10, mouseX - 60, mouseY, mouseX - 45, mouseY + 10)
+            
+            // Each time the mouse is dragged, the opacity decreases by 2
+            opacity-=2
+        }
+        
+        // The design is drawn
+        // As the design follows the mouse, the drawing does not get less or more opaque
+        function mouseMoved() {
+            // Set variable to 255
+            opacity=255
+            
+            // The design follows the mouse and clears the previous drawings
+            clear()
+            
+            // Line surrounding drawing is set to black
+            stroke(0,0,0)
+            
+            // Circles of the design are drawn
+            ellipse(mouseX + 20, mouseY - 20, 30)
+            ellipse(mouseX - 20, mouseY + 20, 30)
+            ellipse(mouseX + 20, mouseY + 20, 30)
+            ellipse(mouseX - 20, mouseY - 20, 30)
+            ellipse(mouseX, mouseY, 45)
+            
+            // Every time the mouse moves the colors are changed to a random color
+            fill(color = (random(0, 255)), color2 = (random(0, 255)), color3 = (random(0, 255)))
+            
+            // Diamond of the design which follows the mouse
+            quad(mouseX, mouseY, mouseX + 10, mouseY + 45, mouseX, mouseY + 60, mouseX - 10, mouseY + 45)
+            quad(mouseX, mouseY, mouseX - 10, mouseY - 45, mouseX, mouseY - 60, mouseX + 10, mouseY - 45)
+            quad(mouseX, mouseY, mouseX + 45, mouseY + 10, mouseX + 60, mouseY, mouseX + 45, mouseY - 10)
+            quad(mouseX, mouseY, mouseX - 45, mouseY - 10, mouseX - 60, mouseY, mouseX - 45, mouseY + 10)
+
+
+        }
+        // When any key on the keyboard is pressed, the background changes to a random color and the start set of the opacity is changed randomly
+        function keyPressed() {
+            // Background is changed to a random color and a random opacity
+            background(random(0,255), random(0,255), random(0,255),opacity)
+            opacity = random(0, 255)
+        }
+        // When the mouse is pressed, the background is changed to a random color
+        function mousePressed(){
+            // Background is changed to a random color and a random opacity
+            background(random(0,255), random(0,255), random(0,255),opacity)
+            
+        }
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/nadiao9188/p5js/blob/gh-pages/interaction-project.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
