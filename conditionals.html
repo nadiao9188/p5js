@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+
+    <script>
+        // variables for colors
+        var r = 255
+        var g = 255
+        var b = 255
+        
+        // variable for picture of bird
+        var bird
+
+        function preload() {
+            // loads image so it is available when you want to use it
+            bird = loadImage("bird.png");
+        }
+
+        function setup() {
+            // size of canvas
+            createCanvas(600, 600);
+            
+            // print the image on the screen at a certai point
+            image(bird, 150, 150, 350, 350)
+            
+            // sets text to a certain size
+            textSize(20)
+            
+            // print directions on the screen
+            text("When you are ready click the screen to color in the drawing ", 30, 30)
+            text("by clicking on the colors in the boxes", 100, 60)
+
+        }
+
+        function draw() {
+            
+            
+        }
+
+            function mouseClicked(){
+                // print image on the screen
+                image(bird, 150, 150, 350, 350)
+                
+                /*the following are the boxes that the user will 
+                click to change the color that they want to draw in*/
+                //yellow box
+                stroke(255, 255, 102)
+                fill(255, 255, 102)
+                rect(50, 65, 50, 50)
+                
+                //red box
+                stroke(204, 0, 0)
+                fill(204, 0, 0)
+                rect(150, 65, 50, 50)
+                
+                //blue box
+                stroke(51, 102, 204)
+                fill(51, 102, 204)
+                rect(250, 65, 50, 50)
+                
+                //black box
+                stroke(0)
+                fill(0)
+                rect(350, 65, 50, 50)
+                
+                //purple box
+                stroke(204, 153, 204)
+                fill(204, 153, 204)
+                rect(450, 65, 50, 50)
+                
+                /* if the mouse clicks a certain box, they will be able to draw
+                in that color. It will change the variables to the colors that
+                the box is equal to.*/
+                if (mouseX > 50 && mouseX < 100 && mouseY > 65 && mouseY < 115) {
+                    r = 255
+                    g = 255
+                    b = 102
+                }
+                else if (mouseX > 150 && mouseX < 200 && mouseY > 65 && mouseY < 115) {
+                    r = 204
+                    g = 0
+                    b = 0
+                }else if (mouseX > 250 && mouseX < 300 && mouseY > 65 && mouseY < 115) {
+                    r = 51
+                    g = 102
+                    b = 204
+                }else if (mouseX > 350 && mouseX < 400 && mouseY > 65 && mouseY < 115) {
+                    r = 0
+                    g = 0
+                    b = 0
+                }else if (mouseX > 450 && mouseX < 500 && mouseY > 65 && mouseY < 115) {
+                    r = 200
+                    g = 153
+                    b = 204
+                }else{
+                    r=r
+                    g=g
+                    b=b
+                }
+            
+            }
+        
+
+        function mouseDragged() {
+            /*if the mouse is dragged then it will print an ellipse that is the same color 
+            of the box that was chosen by the user*/
+            stroke(r,g,b)
+            fill(r,g,b)
+            ellipse(mouseX, mouseY,10,10);
+            
+        }
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/nadiao9188/p5js/blob/master/conditionals.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
