@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Pong</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+    // variables that will be used and defined in the functions
+        var ballX; // location of the ball on the x axis
+        var ballY; // location of the ball on the x axis
+        var ballX2; // location of the 2nd ball on the x axis
+        var ballY2; // location of the 2nd ball on the x axis
+        var ballSpeedX = 0; // speed of the ball on the x axis
+        var ballSpeedY = 0; // speed of the ball on the x axis
+        var ballSpeedX2 = 0; // speed of the 2nd ball on the x axis
+        var ballSpeedY2 = 0; // speed of the 2nd ball on the x axis
+        var paddleHeight = 30; // how tall the paddle is
+        var paddleWidth = 200; // how wide the paddle is
+        var score = 0; // how many times you hit the ball with the paddle
+        
+
+        function setup() {
+            createCanvas(800, 600); // canvas size
+            noCursor(); // hides the mouse
+            // starts the first ball at a random place
+            ballX = random(width);
+            ballY = random(height / 2);
+            // starts the 2nd ball at a random place
+            ballX2 = random(width);
+            ballY2 = random(height / 2);
+        }
+
+        function draw() {
+            background(134,223,255); // makes the background a color
+            moveBall(); // both balls move in X and Y directions
+            checkCollide(); // checks if the 1st ball touches walls or the paddle
+            checkCollide2(); // checks if the 2nd ball touches walls or the paddle
+            drawPaddle(); // draws the paddle 
+            drawBall(); // draws the 2 balls
+            // prints the score wil a white border around it on the
+            // upper right corner of the screen
+            fill(255);
+            rect(580,0,230,100);
+            textSize(35);
+            fill(0);
+            text("Score: " + score, width-180, height / 10); // prints score
+            
+        }
+
+        function moveBall() {
+            ballX = ballX + ballSpeedX; // the 1st ball will change location horizontally 
+            ballY = ballY + ballSpeedY; // the 1st ball will change location vertically 
+            ballX2 = ballX2 + ballSpeedX2; // the 2nd ball will change location horizontally 
+            ballY2 = ballY2 + ballSpeedY2; // the 2nd ball will change location vertically
+            // records location and speed of the 2 balls in the console
+            console.log("ballSpeedX: " + ballSpeedX +
+              ", ballSpeedY: " + ballSpeedY);
+        }
+        // checks collision for the 1st ball
+        function checkCollide() {
+            // if the ball touches the right or left side of the screen
+            if (ballX < 0 || ballX > width) {
+                ballSpeedX = ballSpeedX * -1; // ball will go in the opposite X direction
+            }
+            // if ball touches the top of the screen
+            if (ballY < 0) {
+                ballSpeedY = ballSpeedY * -1; // ball wil go in the opposite Y direction
+            }
+            // ball bounces off paddle 
+            if (ballY > height - paddleHeight) { // ball passes the height of paddle
+                if (ballX > mouseX && ballX < mouseX + 200) { // ball is within the coordinates of the paddle
+                    ballSpeedY = ballSpeedY * -1; // ball wil go in the opposite Y direction
+                    paddleWidth -= 10; // makes paddle smaller
+                    score += 1 // increases score by one
+                }
+                else { // ball goes past the paddle without touching it
+                    fill(0);
+                    text("GAME OVER!", width / 2, height / 2); // prints "Game Over"
+                    noLoop(); // stops the game
+                }
+            }
+        }
+        
+         // checks collision for the 2nd ball
+        function checkCollide2() {
+            // if the ball touches the right or left side of the screen
+            if (ballX2 < 0 || ballX2 > width) {
+                ballSpeedX2 = ballSpeedX2 * -1;// ball will go in the opposite X direction
+            }
+            // if ball touches the top of the screen
+            if (ballY2 < 0) {
+                ballSpeedY2 = ballSpeedY2 * -1;// ball wil go in the opposite Y direction
+            }
+            // ball bounces off paddle 
+            if (ballY2 > height - paddleHeight) { // ball passes the height of paddle
+                if (ballX2> mouseX && ballX2 < mouseX + 200) { // ball is within the coordinates of the paddle
+                    ballSpeedY2 = ballSpeedY2 * -1; // ball wil go in the opposite Y direction
+                    paddleWidth -= 10; // makes paddle smaller
+                    score += 1; // increases score by one
+                }
+                else { // ball goes past the paddle without touching it
+                    fill(0);
+                    text("GAME OVER!", width / 2, height / 2); // prints "Game Over"
+                    noLoop(); // stops the game
+                }
+            }
+        }
+        function drawBall() {
+            noStroke(); // balls do not have outlines
+            fill(random(0,255),random(0,255),random(0,255)); // randomizes color of the 1st ball
+            ellipse(ballX, ballY, 20, 20); // draws 1st ball at the most recent X and Y location
+            fill(random(0,255),random(0,255),random(0,255)); // randomizes color of the 2nd ball
+            ellipse(ballX2, ballY2, 20, 20);  // draws 2nd ball at the most recent X and Y location
+        }
+
+
+        function drawPaddle() {
+            strokeWeight(4);// platform has an outline of 4 pixels
+            fill(255); // inside of outline is white
+            rect(mouseX, height - paddleHeight - 4, paddleWidth, paddleHeight); // the paddle will follow the mouse and
+        }                                                                       // stay on the bottom of the screen
+        
+        // click the mouse to start the game
+        function mousePressed() { // when the mouse is clicked
+            if (ballSpeedX == 0 && ballSpeedX2 == 0) {// if the x speed of the balls are at 0
+                // X and Y speeds of the balls set to 4
+                ballSpeedX = 4;
+                ballSpeedY = 4;
+                ballSpeedX2 = 4;
+                ballSpeedY2 = 4;
+            }
+        }
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/nadiao9188/p5js/blob/gh-pages/pong-remix.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
