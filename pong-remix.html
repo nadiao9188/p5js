@@ -5,7 +5,7 @@
     <title>Pong</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
     <script>
-    // variables that will be used and defined in the functions
+        // variables that will be used and defined in the functions
         var ballX; // location of the ball on the x axis
         var ballY; // location of the ball on the x axis
         var ballX2; // location of the 2nd ball on the x axis
@@ -17,7 +17,7 @@
         var paddleHeight = 30; // how tall the paddle is
         var paddleWidth = 200; // how wide the paddle is
         var score = 0; // how many times you hit the ball with the paddle
-        
+
 
         function setup() {
             createCanvas(800, 600); // canvas size
@@ -31,7 +31,7 @@
         }
 
         function draw() {
-            background(134,223,255); // makes the background a color
+            background(134, 223, 255); // makes the background a color
             moveBall(); // both balls move in X and Y directions
             checkCollide(); // checks if the 1st ball touches walls or the paddle
             checkCollide2(); // checks if the 2nd ball touches walls or the paddle
@@ -39,12 +39,12 @@
             drawBall(); // draws the 2 balls
             // prints the score wil a white border around it on the
             // upper right corner of the screen
-            fill(255);
-            rect(580,0,230,100);
+            fill(255)
+            rect(580, 0, 230, 100);
             textSize(35);
             fill(0);
-            text("Score: " + score, width-180, height / 10); // prints score
-            
+            text("Score: " + score, width - 180, height / 10); // prints score
+
         }
 
         function moveBall() {
@@ -54,7 +54,7 @@
             ballY2 = ballY2 + ballSpeedY2; // the 2nd ball will change location vertically
             // records location and speed of the 2 balls in the console
             console.log("ballSpeedX: " + ballSpeedX +
-              ", ballSpeedY: " + ballSpeedY);
+                ", ballSpeedY: " + ballSpeedY);
         }
         // checks collision for the 1st ball
         function checkCollide() {
@@ -80,20 +80,20 @@
                 }
             }
         }
-        
-         // checks collision for the 2nd ball
+
+        // checks collision for the 2nd ball
         function checkCollide2() {
             // if the ball touches the right or left side of the screen
             if (ballX2 < 0 || ballX2 > width) {
-                ballSpeedX2 = ballSpeedX2 * -1;// ball will go in the opposite X direction
+                ballSpeedX2 = ballSpeedX2 * -1; // ball will go in the opposite X direction
             }
             // if ball touches the top of the screen
             if (ballY2 < 0) {
-                ballSpeedY2 = ballSpeedY2 * -1;// ball wil go in the opposite Y direction
+                ballSpeedY2 = ballSpeedY2 * -1; // ball wil go in the opposite Y direction
             }
             // ball bounces off paddle 
             if (ballY2 > height - paddleHeight) { // ball passes the height of paddle
-                if (ballX2> mouseX && ballX2 < mouseX + 200) { // ball is within the coordinates of the paddle
+                if (ballX2 > mouseX && ballX2 < mouseX + 200) { // ball is within the coordinates of the paddle
                     ballSpeedY2 = ballSpeedY2 * -1; // ball wil go in the opposite Y direction
                     paddleWidth -= 10; // makes paddle smaller
                     score += 1; // increases score by one
@@ -105,24 +105,25 @@
                 }
             }
         }
+
         function drawBall() {
             noStroke(); // balls do not have outlines
-            fill(random(0,255),random(0,255),random(0,255)); // randomizes color of the 1st ball
+            fill(random(0, 255), random(0, 255), random(0, 255)); // randomizes color of the 1st ball
             ellipse(ballX, ballY, 20, 20); // draws 1st ball at the most recent X and Y location
-            fill(random(0,255),random(0,255),random(0,255)); // randomizes color of the 2nd ball
-            ellipse(ballX2, ballY2, 20, 20);  // draws 2nd ball at the most recent X and Y location
+            fill(random(0, 255), random(0, 255), random(0, 255)); // randomizes color of the 2nd ball
+            ellipse(ballX2, ballY2, 20, 20); // draws 2nd ball at the most recent X and Y location
         }
 
 
         function drawPaddle() {
-            strokeWeight(4);// platform has an outline of 4 pixels
+            strokeWeight(4); // platform has an outline of 4 pixels
             fill(255); // inside of outline is white
             rect(mouseX, height - paddleHeight - 4, paddleWidth, paddleHeight); // the paddle will follow the mouse and
-        }                                                                       // stay on the bottom of the screen
-        
+        } // stay on the bottom of the screen
+
         // click the mouse to start the game
         function mousePressed() { // when the mouse is clicked
-            if (ballSpeedX == 0 && ballSpeedX2 == 0) {// if the x speed of the balls are at 0
+            if (ballSpeedX == 0 && ballSpeedX2 == 0) { // if the x speed of the balls are at 0
                 // X and Y speeds of the balls set to 4
                 ballSpeedX = 4;
                 ballSpeedY = 4;
@@ -130,11 +131,21 @@
                 ballSpeedY2 = 4;
             }
         }
+        // when the space key is pressed the game will pause
+        function keyPressed() {
+            if (keyCode === 32) { // if space key is pressed
+            // X and Y speed of the balls will set to 0/ it wi stop moving
+                ballSpeedX = 0;
+                ballSpeedY = 0;
+                ballSpeedX2 = 0;
+                ballSpeedY2 = 0;
+            } 
+        }
     </script>
 </head>
 
 <body>
-<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
     <div id="code" class="container-fluid">
         <script src="https://gist-it.appspot.com/github/nadiao9188/p5js/blob/gh-pages/pong-remix.html?footer=0"></script>
     </div>
